@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">loginForm</string>
+    <string name="logo_desc">App Logo</string>
+    <string name="username_hint">Username or Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Log In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="facebook_desc">Facebook Login</string>
+    <string name="google_desc">Google Login</string>
+    <string name="github_desc">GitHub Login</string>
+    <string name="or_login_with">Or log in with</string>
+    <string name="signup_prompt">Don\'t have an account? Sign up</string>
+</resources>
