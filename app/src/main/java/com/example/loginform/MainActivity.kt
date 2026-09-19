@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
                     ds.isUnderlineText = true
-                    ds.color = getColor(R.color.brand_teal)
+                    ds.color = getColor(R.color.sky_blue)
                 }
             }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
