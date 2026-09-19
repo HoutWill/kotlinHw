@@ -1,5 +1,6 @@
 package com.example.loginform
 
+import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
 import android.text.SpannableString
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
 
             binding.tvSignUp.text = spannableString
             binding.tvSignUp.movementMethod = LinkMovementMethod.getInstance()
+            binding.tvSignUp.highlightColor = Color.TRANSPARENT
         }
 
         // Function to perform login logic
