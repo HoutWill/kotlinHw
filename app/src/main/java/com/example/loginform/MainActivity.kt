@@ -10,6 +10,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,9 +31,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Adjust padding when soft keyboard (IME) or system bars open/close
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val bottomPadding = maxOf(systemBars.bottom, ime.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, bottomPadding)
             insets
         }
 
@@ -73,8 +77,16 @@ class MainActivity : AppCompatActivity() {
             binding.passwordLayout.error = null
         }
 
+        // Helper function to hide the soft keyboard
+        fun hideKeyboard() {
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        }
+
         // Function to perform login logic with error handling
         fun performLogin() {
+            hideKeyboard()
+
             val username = binding.usernameEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
 
