@@ -1,5 +1,6 @@
 package com.example.loginform
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
@@ -69,11 +70,16 @@ class MainActivity : AppCompatActivity() {
             binding.tvSignUp.highlightColor = Color.TRANSPARENT
         }
 
-        // Function to update Login button enabled state based on input presence
+        // Function to update Login button enabled state and color based on input presence
         fun updateLoginButtonState() {
             val username = binding.usernameEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
-            binding.btnLogin.isEnabled = username.isNotEmpty() && password.isNotEmpty()
+            val isFormValid = username.isNotEmpty() && password.isNotEmpty()
+
+            binding.btnLogin.isEnabled = isFormValid
+            binding.btnLogin.backgroundTintList = ColorStateList.valueOf(
+                if (isFormValid) getColor(R.color.brand_teal) else Color.GRAY
+            )
         }
 
         // Clear error messages and update button state when user starts typing
