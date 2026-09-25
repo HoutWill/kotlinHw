@@ -15,6 +15,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doOnTextChanged
 import com.example.loginform.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -64,18 +65,47 @@ class MainActivity : AppCompatActivity() {
             binding.tvSignUp.highlightColor = Color.TRANSPARENT
         }
 
-        // Function to perform login logic
+        // Clear error messages when user starts typing
+        binding.usernameEditText.doOnTextChanged { _, _, _, _ ->
+            binding.usernameLayout.error = null
+        }
+        binding.passwordEditText.doOnTextChanged { _, _, _, _ ->
+            binding.passwordLayout.error = null
+        }
+
+        // Function to perform login logic with error handling
         fun performLogin() {
             val username = binding.usernameEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
 
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
-            } else if (username == "admin" && password == "123456") {
+            // Reset errors
+            binding.usernameLayout.error = null
+            binding.passwordLayout.error = null
+
+            var isValid = true
+
+            if (username.isEmpty()) {
+                binding.usernameLayout.error = getString(R.string.error_username_required)
+                isValid = false
+            }
+
+            if (password.isEmpty()) {
+                binding.passwordLayout.error = getString(R.string.error_password_required)
+                isValid = false
+            } else if (password.length < 6) {
+                binding.passwordLayout.error = getString(R.string.error_password_length)
+                isValid = false
+            }
+
+            if (!isValid) return
+
+            if (username == "admin" && password == "123456") {
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
                 // TODO: Navigate to Home/Dashboard Activity
             } else {
-                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
+                binding.usernameLayout.error = getString(R.string.error_invalid_credentials)
+                binding.passwordLayout.error = getString(R.string.error_invalid_credentials)
+                Toast.makeText(this, getString(R.string.error_invalid_credentials), Toast.LENGTH_SHORT).show()
             }
         }
 

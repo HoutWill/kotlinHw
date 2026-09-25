@@ -61,6 +61,7 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxStrokeColor="@color/brand_teal"
+        app:errorEnabled="true"
         app:hintTextColor="@color/brand_teal"
         app:startIconDrawable="@drawable/username_24"
         app:startIconTint="@color/white"
@@ -75,6 +76,7 @@
             android:inputType="text"
             android:imeOptions="actionNext"
             android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -93,6 +95,7 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxStrokeColor="@color/brand_teal"
+        app:errorEnabled="true"
         app:hintTextColor="@color/brand_teal"
         app:startIconDrawable="@drawable/password_24"
         app:startIconTint="@color/white"
@@ -109,6 +112,7 @@
             android:inputType="textPassword"
             android:imeOptions="actionDone"
             android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
