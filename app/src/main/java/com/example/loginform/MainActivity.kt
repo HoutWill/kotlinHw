@@ -69,13 +69,25 @@ class MainActivity : AppCompatActivity() {
             binding.tvSignUp.highlightColor = Color.TRANSPARENT
         }
 
-        // Clear error messages when user starts typing
+        // Function to update Login button enabled state based on input presence
+        fun updateLoginButtonState() {
+            val username = binding.usernameEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
+            binding.btnLogin.isEnabled = username.isNotEmpty() && password.isNotEmpty()
+        }
+
+        // Clear error messages and update button state when user starts typing
         binding.usernameEditText.doOnTextChanged { _, _, _, _ ->
             binding.usernameLayout.error = null
+            updateLoginButtonState()
         }
         binding.passwordEditText.doOnTextChanged { _, _, _, _ ->
             binding.passwordLayout.error = null
+            updateLoginButtonState()
         }
+
+        // Initialize button state on launch
+        updateLoginButtonState()
 
         // Helper function to hide the soft keyboard
         fun hideKeyboard() {
