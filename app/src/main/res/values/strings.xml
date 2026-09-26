@@ -14,4 +14,13 @@
     <string name="error_password_required">Password is required</string>
     <string name="error_password_length">Password must be at least 6 characters</string>
     <string name="error_invalid_credentials">Invalid username or password</string>
+    <string name="create_account_title">Create Account</string>
+    <string name="email_hint">Email</string>
+    <string name="username_only_hint">Username</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="register_button">Register</string>
+    <string name="or_register_with">Or register with</string>
+    <string name="login_prompt">Already have an account? Log in</string>
+    <string name="error_email_required">Email is required</string>
+    <string name="error_confirm_password">Passwords do not match</string>
 </resources>
