@@ -32,12 +32,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Adjust padding when soft keyboard (IME) or system bars open/close
+        // Adjust padding for system bars
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
-            val bottomPadding = maxOf(systemBars.bottom, ime.bottom)
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, bottomPadding)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
