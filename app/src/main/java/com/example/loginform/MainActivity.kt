@@ -1,5 +1,6 @@
 package com.example.loginform
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Paint
@@ -53,7 +54,8 @@ class MainActivity : AppCompatActivity() {
             val endIndex = startIndex + "Sign up".length
             spannableString.setSpan(object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    Toast.makeText(this@MainActivity, "Sign up clicked", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+                    startActivity(intent)
                 }
 
                 override fun updateDrawState(ds: TextPaint) {
