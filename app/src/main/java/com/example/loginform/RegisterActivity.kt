@@ -32,11 +32,22 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Adjust padding for system bars
+        // Adjust padding when soft keyboard (IME) or system bars open/close
         ViewCompat.setOnApplyWindowInsetsListener(binding.registerMain) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val bottomPadding = maxOf(systemBars.bottom, ime.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, bottomPadding)
             insets
+        }
+
+        // Auto-scroll when focusing on Confirm Password field so input is fully visible above keyboard
+        binding.confirmPasswordEditText.setOnFocusChangeListener { v: View, hasFocus: Boolean ->
+            if (hasFocus) {
+                binding.registerMain.postDelayed({
+                    binding.registerMain.smoothScrollTo(0, binding.confirmPasswordLayout.bottom)
+                }, 200)
+            }
         }
 
         // Setup "Already have an account? Log in" Span Link
