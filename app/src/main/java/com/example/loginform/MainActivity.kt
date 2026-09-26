@@ -95,6 +95,21 @@ class MainActivity : AppCompatActivity() {
         // Initialize button state on launch
         updateLoginButtonState()
 
+        // Helper function to show the soft keyboard
+        fun showKeyboard(view: View) {
+            view.requestFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.showSoftInput(view, 0)
+        }
+
+        binding.usernameEditText.setOnClickListener { showKeyboard(it) }
+        binding.passwordEditText.setOnClickListener { showKeyboard(it) }
+
+        // Automatically focus username field and open soft keyboard on launch
+        binding.usernameEditText.post {
+            showKeyboard(binding.usernameEditText)
+        }
+
         // Helper function to hide the soft keyboard
         fun hideKeyboard() {
             val imm = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
